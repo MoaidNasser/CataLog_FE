@@ -61,4 +61,12 @@ export class UserService {
     return null;
   }
 
+  verify(email : string | null, code : string) {
+
+    return this.http.post<String>
+    (`${this.baseUrl}/user/verify`,{email, code},
+       { responseType: 'text' as 'json' });
+  }
+
+
 }

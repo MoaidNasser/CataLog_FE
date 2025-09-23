@@ -1,0 +1,35 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="col-md-5">
+    <div class="card shadow-lg rounded-4">
+      <div class="card-body p-4">
+        <h4 class="text-center mb-3">تفعيل الحساب</h4>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3 text-center">
+            <input
+              type="text"
+              class="form-control text-center"
+              maxlength="6"
+              pattern="^[0-9]{6}$"
+              [(ngModel)]="code"
+              name="code"
+              required
+              placeholder="أدخل الكود المكون من 6 أرقام"
+            />
+            <div *ngIf="f.submitted && !codeValid" class="text-danger small mt-2">
+              يجب إدخال 6 أرقام صحيحة
+            </div>
+          </div>
+
+          <div class="d-grid">
+            <button type="submit" class="btn btn-success">تأكيد</button>
+          </div>
+        </form>
+
+        <div class="text-center mt-3">
+          <button class="btn btn-link p-0" (click)="resendCode()">إعادة إرسال الكود</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

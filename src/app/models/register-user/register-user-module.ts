@@ -5,5 +5,5 @@ export interface RegisterUserModule {
   email: String;
   password: String;
   confirmPassword: String;
-
+  role : String;
 }

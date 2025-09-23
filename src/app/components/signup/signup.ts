@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { RegisterUserModule } from '../../models/register-user/register-user-module';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user-service';
+import { Router } from '@angular/router';
 
 
 
@@ -19,14 +20,17 @@ export class Signup {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role : 'USER'
   };
 
-  constructor(private crud: UserService) { }
+  constructor(private crud: UserService, private router: Router) { }
 
 
   register(f: NgForm): void {
     this.crud.register(this.user).subscribe();
+    sessionStorage.setItem('email', this.user.email.toString());
+    this.router.navigate(['/verify']);
     console.log(this.user);
   }
 }
