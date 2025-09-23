@@ -1,0 +1,37 @@
+<div class="container py-4">
+  <h2 class="text-center mb-4">Cataas Gallery</h2>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let img of pagedImages">
+      <div class="card shadow-sm h-100">
+        <div class="img-wrapper">
+          <img [src]="img" alt="cat">
+        </div>
+        <div class="card-body text-center">
+          <button
+            class="btn"
+            [ngClass]="isFav(img) ? 'btn-danger' : 'btn-outline-danger'"
+            (click)="toggleFav(img)"
+          >
+            <i class="bi" [ngClass]="isFav(img) ? 'bi-heart-fill' : 'bi-heart'"></i>
+            {{ isFav(img) ? 'Added' : 'Fav' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <button class="btn btn-outline-primary"
+            (click)="prevPage()"
+            [disabled]="currentPage === 1">
+      ← Prev
+    </button>
+
+    <button class="btn btn-outline-primary"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages">
+      Next →
+    </button>
+  </div>
+</div>
