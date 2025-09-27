@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // مهم للتوجيه بعد تسجيل الخروج
 import { CatService } from '../../services/cat-service';
+import { UserService } from '../../services/user-service';
 
 @Component({
   selector: 'app-image-template',
@@ -13,10 +15,10 @@ export class ImageTemplate implements OnInit {
   imagesIds: string[] = [];
   favorites: string[] = [];
 
-  pageSize = 9;           
+  pageSize = 9;
   currentPage = 1;
 
-  constructor(private catService: CatService) {}
+  constructor(private catService: CatService, private router: Router, private userService : UserService) {}
 
   ngOnInit() {
     this.catService.getCats().subscribe({
@@ -30,6 +32,11 @@ export class ImageTemplate implements OnInit {
 
     const fav = localStorage.getItem('favorites');
     this.favorites = fav ? JSON.parse(fav) : [];
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/login']); 
   }
 
   get pagedImages(): string[] {

@@ -18,17 +18,18 @@ export class Login {
     password : ''
   };
 
-  constructor(private crud : UserService, private router : Router) {}
+  constructor(private crud : UserService, private router : Router ) {}
 
   login() {
     this.crud.login(this.user).subscribe({
   next: () => {
     const role = this.crud.getRole();
     console.log(role);
-    if (role === 'ADMIN') {
-      this.router.navigate(['/admin-dashboard']);
+    if (role === 'USER' && this.crud.isLoggedIn()) {
+     
+      this.router.navigate(['/cats']);
     } else {
-      this.router.navigate(['/user-profile']);
+      alert("Login firstly.");
     }
   },
   error: err => {
